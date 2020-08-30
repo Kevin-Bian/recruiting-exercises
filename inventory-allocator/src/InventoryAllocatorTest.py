@@ -8,6 +8,7 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             Basic test from Github question
         """
+
         warehouses = [{'name': 'owd', 'inventory': {'apple': 1}}]
         order = {'apple': 1}
         output = [{'owd': {'apple': 1}}]
@@ -19,6 +20,7 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             Basic test from Github question
         """
+
         warehouses = [{'name': 'owd', 'inventory': {'apple': 5}},
                       {'name': 'dm', 'inventory': {'apple': 5}}]
         order = {'apple': 10}
@@ -31,13 +33,14 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             Basic test from Github question
         """
+
         warehouses = [{'name': 'owd', 'inventory': {'apple': 0}}]
         order = {'apple': 1}
         output = []
 
         allocateor = InventoryAllocator(order, warehouses)
         self.assertEqual(allocateor.getInventoryDistribution(), output)
-        
+
         warehouses = [{'name': 'owd', 'inventory': {'apple': 1}}]
         order = {'apple': 2}
         output = []
@@ -49,6 +52,7 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             Split order should take from multiple warehouses
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}},
                       {'name': 'warehouse2',
@@ -62,29 +66,33 @@ class TestInventoryAllocator(unittest.TestCase):
 
         allocateor = InventoryAllocator(order, warehouses)
         self.assertEqual(allocateor.getInventoryDistribution(), output)
-        
+
     def test_orderSplitMinimum(self):
         """
             Split order should take from multiple warehouses but 
             one warehouse is cheaper than multiple so it is minimum
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}},
                       {'name': 'warehouse2',
                       'inventory': {'product1': 5, 'product2': 2}},
                       {'name': 'warehouse3',
-                      'inventory': {'product1': 5, 'product2': 2, 'product3': 5}}]
+                      'inventory': {'product1': 5, 'product2': 2,
+                      'product3': 5}}]
         order = {'product1': 5, 'product2': 2, 'product3': 4}
-        output = [{'warehouse3': {'product1': 5, 'product2': 2, 'product3': 4}}]
+        output = [{'warehouse3': {'product1': 5, 'product2': 2,
+                  'product3': 4}}]
 
         allocateor = InventoryAllocator(order, warehouses)
         self.assertEqual(allocateor.getInventoryDistribution(), output)
-        
+
     def test_orderSplitMinimumTwo(self):
         """
             Split order should take from multiple warehouses but 
             one warehouse for product1 is cheaper than multiple for product1
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}},
                       {'name': 'warehouse2',
@@ -94,7 +102,8 @@ class TestInventoryAllocator(unittest.TestCase):
                       {'name': 'warehouse4',
                       'inventory': {'product2': 2}}]
         order = {'product1': 10, 'product2': 1}
-        output = [{'warehouse3': {'product1': 10}}, {'warehouse4': {'product2': 1}}]
+        output = [{'warehouse3': {'product1': 10}},
+                  {'warehouse4': {'product2': 1}}]
 
         allocateor = InventoryAllocator(order, warehouses)
         self.assertEqual(allocateor.getInventoryDistribution(), output)
@@ -103,6 +112,7 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             Warehouse that can fullfill entire order with 1 product
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}}]
         order = {'product1': 5}
@@ -115,6 +125,7 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             Warehouse that can fullfill entire order with 2 products
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5, 'product2': 6}}]
         order = {'product1': 5, 'product2': 6}
@@ -129,6 +140,7 @@ class TestInventoryAllocator(unittest.TestCase):
             but one warehouse is cheaper than multiple.
             Full warehouse appears after partial warehouses
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}},
                       {'name': 'warehouse2',
@@ -147,6 +159,7 @@ class TestInventoryAllocator(unittest.TestCase):
             but one warehouse is cheaper than multiple/
             Full warehouse appears before partial warehouses
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5, 'product2': 6}},
                       {'name': 'warehouse2',
@@ -163,6 +176,7 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             Warehouse with 0 stock
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 0}},
                       {'name': 'warehouse2', 'inventory': {}}]
@@ -176,6 +190,7 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             Order with 0 stock
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}}]
         order = {'product1': 0}
@@ -183,11 +198,12 @@ class TestInventoryAllocator(unittest.TestCase):
 
         allocateor = InventoryAllocator(order, warehouses)
         self.assertEqual(allocateor.getInventoryDistribution(), output)
-        
+
     def test_emptyOrder(self):
         """
             No items in order
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}}]
         order = {}
@@ -200,17 +216,19 @@ class TestInventoryAllocator(unittest.TestCase):
         """
             No items in warehouse
         """
+
         warehouses = []
         order = {'product1': 4}
         output = []
 
         allocateor = InventoryAllocator(order, warehouses)
         self.assertEqual(allocateor.getInventoryDistribution(), output)
-        
+
     def test_impossibleOrder(self):
         """
             Not enough inventory to fill order
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}},
                       {'name': 'warehouse2',
@@ -220,11 +238,12 @@ class TestInventoryAllocator(unittest.TestCase):
 
         allocateor = InventoryAllocator(order, warehouses)
         self.assertEqual(allocateor.getInventoryDistribution(), output)
-        
+
     def test_minimumOutput(self):
         """
             Should take closer warehouse if it can fill order
         """
+
         warehouses = [{'name': 'warehouse1',
                       'inventory': {'product1': 5}},
                       {'name': 'warehouse2',
