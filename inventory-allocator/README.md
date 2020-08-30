@@ -1,4 +1,4 @@
-### Author: Kevin Bian, qiqikevin@outlook.com, Python 3
+### Author: Kevin Bian, qiqikevin@outlook.com, Python 3.8.5
 ## My solution
 
 Main idea behind the solution is to take what is similar to a greedy algorithm approach. We will loop over all the warehouses and fill as many products/items from the order as we can. 
