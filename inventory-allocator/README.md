@@ -1,3 +1,50 @@
+### Author: Kevin Bian, qiqikevin@outlook.com, Python 3
+## My solution
+
+Main idea behind the solution is to take what is similar to a greedy algorithm approach. We will loop over all the warehouses and fill as many products/items from the order as we can. 
+
+From the FAQ, we are given the **additional constraint that one warehouse is cheaper than multiple.**
+
+Therefore, whenever we encounter a warehouse that can join two previously seperated ones, we will pick it instead to fill the order.
+
+1. Loop through warehouses
+   1. For through items
+      1. Update order by taking as much of the item as possible from current warehouse.
+      2. We can either split up the order or join previously split orders (if current warehouse can fill an entire item)
+   2. Check if current warehouse can fully fill order (if so we are done)
+2. Check if order is complete and return the result if so
+
+```
+warehouses = [{'name': 'owd', 'inventory': {'apple': 1}}]
+order = {'apple': 1}
+output = [{'owd': {'apple': 1}}]
+
+allocateor = InventoryAllocator(order, warehouses)
+
+# This will return the answer
+solution = allocateor.getInventoryDistribution() 
+```
+
+
+## Testing
+
+To run tests cd into the inventory-allocator/src folder. Then run
+
+```
+python3 InventoryAllocatorTest.py
+```
+
+Tests include
+- Basic tests from question
+- Matches, no matches, partial matches
+- Orders that split and take multiple warehouses
+- Orders that split with minimum multiple warehouses taken since it is cheaper
+- Warehouse that can fit entire order should always be used
+- Invalid quantities (for warehouse stock, order quantity, order items, etc)
+- Empty and impossible cases (order and warehouse)
+- Minimum output and making sure cheapest list is produced
+- And many more... (please see InventoryAllocatorTest.py comments)
+
 
 
 ## Problem
@@ -19,8 +66,7 @@ The second input will be a list of object with warehouse name and inventory amou
     }, 
     {
     	name: dm:,
-    	inventory: { banana: 5, orange: 10 } 
-    }
+    	inventory: { banana: 5, orange: 10 } 1
 ]`
 
 You can assume that the list of warehouses is pre-sorted based on cost. The first warehouse will be less expensive to ship from than the second warehouse.
@@ -57,5 +103,5 @@ We'll evaluate your code via the following guidelines in no particular order:
 
 1. **Readability**: naming, spacing, consistency
 2. **Correctness**: is the solution correct and does it solve the problem
-1. **Test Code Quality**: Is the test code comperehensive and covering all cases.
-1. **Tool/Language mastery**: is the code using up to date syntax and techniques. 
+3. **Test Code Quality**: Is the test code comperehensive and covering all cases.
+4. **Tool/Language mastery**: is the code using up to date syntax and techniques. 
