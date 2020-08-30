@@ -135,8 +135,6 @@ class InventoryAllocator:
                             for (warehouse, itemTable) in inventoryDistribution.items():
                                 if item in itemTable:
                                     del inventoryDistribution[warehouse][item]
-                                    if not inventoryDistribution[warehouse]:
-                                        del inventoryDistribution[warehouse]
                         inventoryDistribution[currWarehouseName][item] = self.orderMap[item]
                         currWarehouseItems[item] = self.orderMap[item]
                         currOrder[item] = 0

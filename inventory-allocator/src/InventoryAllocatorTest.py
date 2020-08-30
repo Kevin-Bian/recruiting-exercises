@@ -61,8 +61,8 @@ class TestInventoryAllocator(unittest.TestCase):
                       'inventory': {'product2': 2, 'product3': 5}}]
         order = {'product1': 7, 'product2': 4, 'product3': 4}
         output = [{'warehouse1': {'product1': 5}},
-                  {'warehouse3': {'product2': 2, 'product3': 4}},
-                  {'warehouse2': {'product1': 2, 'product2': 2}}]
+                  {'warehouse2': {'product1': 2, 'product2': 2}},
+                  {'warehouse3': {'product2': 2, 'product3': 4}},]
 
         allocateor = InventoryAllocator(order, warehouses)
         self.assertEqual(allocateor.getInventoryDistribution(), output)
