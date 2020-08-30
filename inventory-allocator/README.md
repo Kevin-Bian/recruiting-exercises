@@ -8,11 +8,11 @@ From the FAQ, we are given the **additional constraint that one warehouse is che
 Therefore, whenever we encounter a warehouse that can join two previously seperated ones, we will pick it instead to fill the order.
 
 1. Loop through warehouses
-   1. For through items
-      1. Update order by taking as much of the item as possible from current warehouse.
-      2. We can either split up the order or join previously split orders (if current warehouse can fill an entire item)
-   2. Check if current warehouse can fully fill order (if so we are done)
-2. Check if order is complete and return the result if so
+   1. Loop through items
+      1. Update the order by taking as much of the item as possible from the current warehouse.
+      2. We can either split up the order or join previously split orders (if the current warehouse can fill an entire item)
+   2. Check if the current warehouse can fully fill the order (if so we are done)
+2. Check if the order is complete and return the result if so
 
 ```
 warehouses = [{'name': 'owd', 'inventory': {'apple': 1}}]
@@ -38,9 +38,9 @@ Tests include
 - Basic tests from question
 - Matches, no matches, partial matches
 - Orders that split and take multiple warehouses
-- Orders that split with minimum multiple warehouses taken since it is cheaper
-- Warehouse that can fit entire order should always be used
-- Invalid quantities (for warehouse stock, order quantity, order items, etc)
+- Orders that split that take the minimum warehouses since it is cheaper
+- Warehouse that can fit the entire order should always be used
+- Invalid quantities (for warehouse stock, order quantity, order items, etc.)
 - Empty and impossible cases (order and warehouse)
 - Minimum output and making sure cheapest list is produced
 - And many more... (please see InventoryAllocatorTest.py comments)
